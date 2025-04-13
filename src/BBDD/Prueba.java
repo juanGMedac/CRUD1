@@ -10,10 +10,10 @@ public class Prueba {
 
         String sentencia = "INSERT INTO Personas(Nombre, Edad) VALUES ('Pablo', 18)";
         String busqueda = "SELECT * FROM Personas";
-        ConexionMySQL conexion = new ConexionMySQL("usuario", "pass", "bd");
+        ConexionOracle conexion = new ConexionOracle();
 
         try {
-            conexion.conectar();
+            conexion.getConnection();
             conexion.ejecutarInsertDeleteUpdate(sentencia);
 
             ResultSet resultado = conexion.ejecutarSelect(busqueda);
@@ -25,7 +25,7 @@ public class Prueba {
             }
 
             resultado.close();
-            conexion.desconectar();
+            conexion.cerrar();
 
         } catch (SQLException e) {
             System.err.println("Error en la base de datos: " + e.getMessage());
